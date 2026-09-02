@@ -2,6 +2,8 @@ package com.example.registrocolaboradores.controllers;
 
 import com.example.registrocolaboradores.models.Curso;
 import com.example.registrocolaboradores.models.Usuario;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -34,6 +36,8 @@ public class MatriculaController {
     @FXML private TableColumn<Usuario, LocalDate> colFechaNac;
     @FXML private TableColumn<Usuario, String > colDepartamento;
 
+    private final ObservableList<Usuario> usuarios = FXCollections.observableArrayList();
+
     @FXML
     protected void agregarOnClick() {
         String nombres = txtNombres.getText().trim();
@@ -41,7 +45,11 @@ public class MatriculaController {
         String usuario = txtUsuario.getText().trim();
         String password = pwPassword.getText().trim();
         LocalDate fechaNac = dpFechaNac.getValue();
-        String departamento = cbDepartamento.
+        String departamento = cbDepartamento.getValue();
+
+    }
+
+    private void validarCampos() {
 
     }
 
@@ -52,7 +60,6 @@ public class MatriculaController {
         pwPassword.clear();
         dpFechaNac.setValue(null);
         txtNombres.requestFocus();
-
     }
 
     @FXML
