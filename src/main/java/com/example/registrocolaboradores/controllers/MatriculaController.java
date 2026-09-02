@@ -1,8 +1,12 @@
 package com.example.registrocolaboradores.controllers;
 
+import com.example.registrocolaboradores.models.Curso;
+import com.example.registrocolaboradores.models.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+
+import java.time.LocalDate;
 
 public class MatriculaController {
     @FXML private TextField txtNombres;
@@ -16,7 +20,40 @@ public class MatriculaController {
     @FXML private CheckBox cbHorario;
     @FXML private CheckBox cbAceptarNormas;
     @FXML private ImageView imgLogo;
-    @FXML private Button btnLogin;
+
+    //Botones
+    @FXML private Button btnRegistrar;
+    @FXML private Button btnActualizar;
+    @FXML private Button btnEliminar;
+
+    //Tabla
+    @FXML private TableView<Usuario> tablaUsuarios;
+    @FXML private TableColumn<Usuario, String> colNombres;
+    @FXML private TableColumn<Usuario, String> colApellidos;
+    @FXML private TableColumn<Usuario, String> colUsuario;
+    @FXML private TableColumn<Usuario, LocalDate> colFechaNac;
+    @FXML private TableColumn<Usuario, String > colDepartamento;
+
+    @FXML
+    protected void agregarOnClick() {
+        String nombres = txtNombres.getText().trim();
+        String apellidos = txtApellidos.getText().trim();
+        String usuario = txtUsuario.getText().trim();
+        String password = pwPassword.getText().trim();
+        LocalDate fechaNac = dpFechaNac.getValue();
+        String departamento = cbDepartamento.
+
+    }
+
+    private void limpiarCampos() {
+        txtNombres.clear();
+        txtApellidos.clear();
+        txtUsuario.clear();
+        pwPassword.clear();
+        dpFechaNac.setValue(null);
+        txtNombres.requestFocus();
+
+    }
 
     @FXML
     private void mostrarAlerta(String titulo, String mensaje) {
