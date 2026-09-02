@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
@@ -23,7 +21,8 @@
 
 <VBox prefHeight="650.0" prefWidth="800.0" spacing="12.0"
       xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1">
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.registrocolaboradores.controllers.MatriculaController">
     <padding>
         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
     </padding>
@@ -54,31 +53,10 @@
         <DatePicker fx:id="fechaNacimientoDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
         <Label text="Departamento:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-        <ComboBox fx:id="departamentoComboBox" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Managua"/>
-                    <String fx:value="Masaya"/>
-                    <String fx:value="Granada"/>
-                    <String fx:value="Leon"/>
-                    <String fx:value="Chinandega"/>
-                    <String fx:value="Matagalpa"/>
-                    <String fx:value="Esteli"/>
-                </FXCollections>
-            </items>
-        </ComboBox>
+        <ComboBox fx:id="departamentoComboBox" prefWidth="270.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
         <Label text="Curso:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-        <ListView fx:id="cursoListView" prefHeight="95.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Programacion"/>
-                    <String fx:value="Excel"/>
-                    <String fx:value="Redes"/>
-                    <String fx:value="Diseno grafico"/>
-                </FXCollections>
-            </items>
-        </ListView>
+        <ListView fx:id="cursoListView" prefHeight="95.0" prefWidth="270.0" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 
         <Label text="Modalidad:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
         <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
@@ -101,8 +79,8 @@
     </GridPane>
 
     <HBox spacing="10.0">
-        <Button fx:id="registrarButton" text="Registrar"/>
-        <Button fx:id="limpiarButton" text="Limpiar"/>
+        <Button fx:id="registrarButton" onAction="#registrarMatricula" text="Registrar"/>
+        <Button fx:id="limpiarButton" onAction="#limpiarCampos" text="Limpiar"/>
     </HBox>
 
     <TableView fx:id="matriculaTableView" prefHeight="220.0">
