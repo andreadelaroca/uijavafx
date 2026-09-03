@@ -84,7 +84,8 @@
 
     <TableView fx:id="matriculaTableView" prefHeight="220.0">
         <columns>
-            <TableColumn fx:id="nombreCompletoColumn" prefWidth="160.0" text="Nombre completo" />
+            <TableColumn fx:id="nombresColumn" prefWidth="160.0" text="Nombres" />
+            <TableColumn fx:id="apellidosColumn" prefWidth="160.0" text="Apellidos" />
             <TableColumn fx:id="departamentoColumn" prefWidth="120.0" text="Departamento" />
             <TableColumn fx:id="cursoColumn" prefWidth="120.0" text="Curso" />
             <TableColumn fx:id="modalidadColumn" prefWidth="100.0" text="Modalidad" />

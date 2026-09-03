@@ -17,6 +17,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.46</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>21.0.6</version>
@@ -58,7 +64,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.registrocolaboradores/com.example.registrocolaboradores.HelloApplication
+                                com.example.registrocolaboradores/com.example.registrocolaboradores.MatriculaApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

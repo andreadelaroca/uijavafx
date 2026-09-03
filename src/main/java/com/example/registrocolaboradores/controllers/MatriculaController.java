@@ -1,6 +1,7 @@
 package com.example.registrocolaboradores.controllers;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
@@ -14,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lombok.Data;
 
 public class MatriculaController {
     @FXML
@@ -45,19 +47,23 @@ public class MatriculaController {
     @FXML
     private CheckBox normasCheckBox;
     @FXML
-    private TableView<Matricula> matriculaTableView;
+    private TableView<MatriculaTabla> matriculaTableView;
     @FXML
-    private TableColumn<Matricula, String> nombreCompletoColumn;
+    private TableColumn<MatriculaTabla, String> nombresColumn;
     @FXML
-    private TableColumn<Matricula, String> departamentoColumn;
+    private TableColumn<MatriculaTabla, String> apellidosColumn;
     @FXML
-    private TableColumn<Matricula, String> cursoColumn;
+    private TableColumn<MatriculaTabla, String> departamentoColumn;
     @FXML
-    private TableColumn<Matricula, String> modalidadColumn;
+    private TableColumn<MatriculaTabla, String> cursoColumn;
     @FXML
-    private TableColumn<Matricula, String> horarioColumn;
+    private TableColumn<MatriculaTabla, String> modalidadColumn;
     @FXML
-    private TableColumn<Matricula, String> fechaNacimientoColumn;
+    private TableColumn<MatriculaTabla, String> horarioColumn;
+    @FXML
+    private TableColumn<MatriculaTabla, String> fechaNacimientoColumn;
+
+    private final ObservableList<MatriculaTabla> matriculas =FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -88,39 +94,44 @@ public class MatriculaController {
                 "Diseno grafico"
         ));
 
-        nombreCompletoColumn.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
+        nombresColumn.setCellValueFactory(new PropertyValueFactory<>("nombres"));
+        apellidosColumn.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
         departamentoColumn.setCellValueFactory(new PropertyValueFactory<>("departamento"));
         cursoColumn.setCellValueFactory(new PropertyValueFactory<>("curso"));
         modalidadColumn.setCellValueFactory(new PropertyValueFactory<>("modalidad"));
         horarioColumn.setCellValueFactory(new PropertyValueFactory<>("horario"));
         fechaNacimientoColumn.setCellValueFactory(new PropertyValueFactory<>("fechaNacimiento"));
+
+        matriculaTableView.setItems(matriculas);
     }
 
     @FXML
     private void registrarMatricula() {
         String error = validarCampos();
-
         if (!error.isEmpty()) {
             mostrarAlerta(error);
             return;
         }
 
-        String nombreCompleto = nombresTextField.getText().trim() + " " + apellidosTextField.getText().trim();
+        String nombres = nombresTextField.getText().trim();
+        String apellidos = apellidosTextField.getText().trim();
         String departamento = departamentoComboBox.getValue();
         String curso = cursoListView.getSelectionModel().getSelectedItem();
         String modalidad = presencialRadioButton.isSelected() ? "Presencial" : "Virtual";
         String horario = obtenerHorario();
         String fechaNacimiento = fechaNacimientoDatePicker.getValue().toString();
 
-        matriculaTableView.getItems().add(new Matricula(
-                nombreCompleto,
+        MatriculaTabla matriculaTabla = new MatriculaTabla(
+                nombres,
+                apellidos,
                 departamento,
                 curso,
                 modalidad,
                 horario,
                 fechaNacimiento
-        ));
+        );
 
+        matriculas.add(matriculaTabla);
         limpiarCampos();
     }
 
@@ -222,46 +233,27 @@ public class MatriculaController {
         alert.showAndWait();
     }
 
-    public static class Matricula {
-        private final String nombreCompleto;
+    @Data
+    public static class MatriculaTabla {
+        private final String nombres;
+        private final String apellidos;
         private final String departamento;
         private final String curso;
         private final String modalidad;
         private final String horario;
         private final String fechaNacimiento;
 
-        public Matricula(String nombreCompleto, String departamento, String curso, String modalidad,
-                         String horario, String fechaNacimiento) {
-            this.nombreCompleto = nombreCompleto;
+        public MatriculaTabla(String nombres, String apellidos, String departamento, String curso, String modalidad, String horario, String fechaNacimiento) {
+
+            this.nombres = nombres;
+            this.apellidos = apellidos;
             this.departamento = departamento;
             this.curso = curso;
             this.modalidad = modalidad;
             this.horario = horario;
             this.fechaNacimiento = fechaNacimiento;
         }
-
-        public String getNombreCompleto() {
-            return nombreCompleto;
-        }
-
-        public String getDepartamento() {
-            return departamento;
-        }
-
-        public String getCurso() {
-            return curso;
-        }
-
-        public String getModalidad() {
-            return modalidad;
-        }
-
-        public String getHorario() {
-            return horario;
-        }
-
-        public String getFechaNacimiento() {
-            return fechaNacimiento;
-        }
     }
+
+
 }
